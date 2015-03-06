@@ -1,0 +1,26 @@
+{
+  "name": "mock-all",
+  "version": "0.0.1",
+  "description": "NodeJS module to substitute any dependencies and access to a private methods",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/breeeew/mock-all.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mock",
+    "mock-all",
+    "unit-test",
+    "mock-functions",
+    "mock-modules"
+  ],
+  "author": "Abdulla Bayramov (breeeew@gmail.com)",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/breeeew/mock-all/issues"
+  }
+}

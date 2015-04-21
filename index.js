@@ -15,10 +15,11 @@ path = require("path");
 #
 # @param {string} filePath Absolute path to module (file to load)
 # @param {Object=} mocks Hash of mocked dependencies
+# @param {string} pass as __dirname to context
 */
 
 
-module.exports = function(filePath, mocks) {
+module.exports = function(filePath, mocks, dir) {
   var context, exports, resolveModule;
   mocks = mocks || {};
   resolveModule = function(module) {
@@ -32,6 +33,7 @@ module.exports = function(filePath, mocks) {
     require: function(name) {
       return mocks[name] || require(resolveModule(name));
     },
+    __dirname: dir,
     console: console,
     exports: exports,
     module: {

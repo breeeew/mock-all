@@ -43,3 +43,13 @@ var mockedModule = mock("#{__dirname}/../build/mySuperModule.js", mocks, globals
 var buf = mockedModule.func("str");
 assert.ok(buffer.isBuffer(buf), "Test failed!");
 </pre></code>
+
+You can mock any variable after create mocked module:
+<pre><code>
+mockedModule.__setMock__("fs", {writeFile: function(f, d, cb) {cb(null)}});
+</pre></code>
+
+And restore mocked variable with __setMock__:
+<pre><code>
+mockedModule.__restoreAll__();
+</pre></code>

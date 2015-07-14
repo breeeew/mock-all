@@ -25,6 +25,7 @@ var forbidden_names = {
   'exports': true
 };
 
+
 module.exports = function(filePath, mocks, globals) {
   var context, exports, resolveModule;
   mocks = mocks || {};
@@ -52,6 +53,23 @@ module.exports = function(filePath, mocks, globals) {
     if (forbidden_names[attrname]) continue;
     context[attrname] = globals[attrname];
   }
+
+  context["__setMock__"] = function(k, v) {
+    if (typeof k !== "string") throw new Error("Expected first argument as String type");
+    var replaced_key = "__replaced__" + k;
+    this[replaced_key] = this[k];
+    this[k] = v;
+  }
+
+  context["__restoreAll__"] = function() {
+    for (var p in this) {
+      if (p.indexOf("__replaced__") !== -1) {
+        var key_to_restore = p.split("__replaced__")[1];
+        this[key_to_restore] = this[p];
+      }
+    }
+  }
+
   vm.runInNewContext(fs.readFileSync(filePath), context);
   return context;
 };

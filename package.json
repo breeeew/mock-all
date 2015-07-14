@@ -1,6 +1,6 @@
 {
   "name": "mock-all",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "NodeJS module to substitute any dependencies and access to a private methods",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,19 @@
     "mock-functions",
     "mock-modules"
   ],
-  "author": "Abdulla Bayramov (breeeew@gmail.com)",
+  "author": {
+    "name": "Abdulla Bayramov",
+    "url": "breeeew@gmail.com"
+  },
   "license": "GNU",
   "bugs": {
     "url": "https://github.com/breeeew/mock-all/issues"
-  }
+  },
+  "readme": "# mock-all\nNodeJS simple mocking\n\nExample:\n\n`mySuperModule.js:`\n<pre><code>\nvar myAnotherModule = require('myAnotherModule');\nvar logger = require(__dirname + \"/../config/logging\");\n\nexports.func = function func(arg) {\n  logger.log(myAnotherModule.foo());\n  return new Buffer(arg + myAnotherModule.foo() + arg);\n}\n</pre></code>\n\n`test_mySuperModule.js:`\n<pre><code>\nvar mock = require(\"mock-all\");\nvar fsMock = {\n  readFileSync: function() {\n    return \"\";\n  }\n};\n\nmyAnotherModuleMock = {\n  foo: function () {\n    return \"bar\";\n  }\n}\nvar mocks = {\n  fs: fsMock,\n  myAnotherModule: myAnotherModuleMock,\n  \"/../config/logging\": console\n};\nvar globals = {\n  // can override global __dirname in mySuperModule.js\n  __dirname: __dirname,\n  Buffer: Buffer\n};\n\nvar mockedModule = mock(\"#{__dirname}/../build/mySuperModule.js\", mocks, globals);\nvar buf = mockedModule.func(\"str\");\nassert.ok(buffer.isBuffer(buf), \"Test failed!\");\n</pre></code>\n",
+  "readmeFilename": "README.md",
+  "gitHead": "8737a6e29007a2f53acb6cb2dc52a014f9e92dbb",
+  "homepage": "https://github.com/breeeew/mock-all",
+  "_id": "mock-all@0.0.3",
+  "_shasum": "3178eb25fddec5da129da0b04353394f2709af60",
+  "_from": "mock-all@*"
 }

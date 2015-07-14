@@ -46,10 +46,10 @@ assert.ok(buffer.isBuffer(buf), "Test failed!");
 
 You can mock any variable after create mocked module:
 <pre><code>
-mockedModule.__setMock__("fs", {writeFile: function(f, d, cb) {cb(null)}});
+mockedModule.\__setMock__("fs", {writeFile: function(f, d, cb) {cb(null)}});
 </pre></code>
 
-And restore mocked variable with __setMock__:
+And restore mocked variable with \__setMock__:
 <pre><code>
-mockedModule.__restoreAll__();
+mockedModule.\__restoreAll__();
 </pre></code>
